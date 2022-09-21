@@ -1,14 +1,34 @@
-import { Link, Outlet } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useLocation, Outlet } from "react-router-dom";
+import { BackLink } from "../components/BackLink/BackLink";
 import { getMovieById } from "../Api/Api";
+import { useEffect, useState,  } from "react";
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const { id } = useParams();
-    const movie = getMovieById(id);
+    const { movie, setMovie } = useState(null);
+    const location = useLocation();
+
+    useEffect(() => {
+        getMovieById(id).then(setMovie);
+    }, [id, setMovie]);
+
+    if (!movie) { return null };
+
+    const { backdrop_path, original_title, popularity, overview, genres } = movie;
+
+    const backLinkHref = location.state?.from ?? "/movies";
+    
     return (
         <main>
+            <BackLink to={backLinkHref}>Back to movies</BackLink>
             <div>
-                <h2>Movie - {movie.name} - {id}</h2>
+                <div><img src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt="" /></div>
+                <h2>Movie - {original_title} - {id}</h2>
+                <p>User score: {popularity}</p>
+                <h3>Ovwerview</h3>
+                <p>{overview}</p>
+                <h3>Genres</h3>
+                <ul>{genres.map(({ id, name }) => <li key={id}> {name}</li>)}</ul>
             </div>
             <ul>
                 <li>
@@ -22,3 +42,5 @@ export const MovieDetails = () => {
         </main>
     );
 };
+
+export default MovieDetails;
