@@ -4,26 +4,26 @@ import { getMovieById } from "../Api/Api";
 import { useEffect, useState,  } from "react";
 
 const MovieDetails = () => {
-    const { id } = useParams();
+    const { movieId } = useParams();
     const { movie, setMovie } = useState(null);
     const location = useLocation();
 
     useEffect(() => {
-        getMovieById(id).then(setMovie);
-    }, [id, setMovie]);
+        getMovieById(movieId).then(setMovie);
+    }, [movieId, setMovie]);
 
     if (!movie) { return null };
-
+console.log(movie)
     const { backdrop_path, original_title, popularity, overview, genres } = movie;
 
-    const backLinkHref = location.state?.from ?? "/movies";
+    const backLinkHref = location?.state?.from ?? "/movies";
     
     return (
         <main>
             <BackLink to={backLinkHref}>Back to movies</BackLink>
             <div>
                 <div><img src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt="" /></div>
-                <h2>Movie - {original_title} - {id}</h2>
+                <h2>Movie - {original_title} - {movieId}</h2>
                 <p>User score: {popularity}</p>
                 <h3>Ovwerview</h3>
                 <p>{overview}</p>
@@ -32,10 +32,10 @@ const MovieDetails = () => {
             </div>
             <ul>
                 <li>
-                    <Link to="cast">Get to know the cast</Link>
+                    <Link to="cast" state={{from: location?.state?.from}}>Get to know the cast</Link>
                 </li>
                 <li>
-                    <Link to="reviews">Go through the reviews</Link>
+                    <Link to="reviews" state={{from: location?.state?.from}}>Go through the reviews</Link>
                 </li>
             </ul>
             <Outlet />
