@@ -8,7 +8,6 @@ const MoviesList = ({ movies }) => {
                 {movies.map(({ original_title, id, backdrop_path }) => (
                     <CardWrapper key={id}>
                         <Link to={`${id}`} state={{ from: location }}>
-                            <img src={backdrop_path} alt="" />
                             <MovieName>{original_title}</MovieName>
                         </Link>
                     </CardWrapper>
