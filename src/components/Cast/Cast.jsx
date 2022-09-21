@@ -13,13 +13,12 @@ const Cast = () => {
     if (!cast) {
         return null;
     }
-
     return (
         <div>
             <ul>
-                {cast.cast.map(({ character, name, profile_path, id }) => profile_path &&
+                {cast.data.cast.map(({ character, name, profile_path, id }) => profile_path &&
                     <li key={id}>
-                        <img src={`https://image.tmdb.org/t/p/original/${profile_path}`} alt="" />
+                        <img src={`https://image.tmdb.org/t/p/original/${profile_path}`} alt="" width={300}/>
                         <p>{name}</p>
                         <p>Character: {character}</p>
                     </li>)}

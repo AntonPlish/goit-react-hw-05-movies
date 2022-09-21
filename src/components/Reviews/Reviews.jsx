@@ -17,7 +17,7 @@ const Review = () => {
     return (
         <div>
             <ul>
-                {review.review.map(({ id, author, content }) =>
+                {review.data.results.map(({ id, author, content }) =>
                     <li key={id}>
                         <p>{author}</p>
                         <p>{content}</p>
