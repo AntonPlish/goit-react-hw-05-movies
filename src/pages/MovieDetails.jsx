@@ -5,24 +5,24 @@ import { useEffect, useState,  } from "react";
 
 const MovieDetails = () => {
     const { movieId } = useParams();
-    const { movie, setMovie } = useState(null);
+    const [movie, setMovie] = useState(null);
     const location = useLocation();
 
     useEffect(() => {
         getMovieById(movieId).then(setMovie);
-    }, [movieId, setMovie]);
+    }, [movieId]);
 
     if (!movie) { return null };
-console.log(movie)
-    const { backdrop_path, original_title, popularity, overview, genres } = movie;
+    
+    const { backdrop_path, original_title, popularity, overview, genres } = movie.data;
 
     const backLinkHref = location?.state?.from ?? "/movies";
-    
+
     return (
-        <main>
+        <div>
             <BackLink to={backLinkHref}>Back to movies</BackLink>
             <div>
-                <div><img src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt="" /></div>
+                <img src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt="" width={600}/>
                 <h2>Movie - {original_title} - {movieId}</h2>
                 <p>User score: {popularity}</p>
                 <h3>Ovwerview</h3>
@@ -32,15 +32,15 @@ console.log(movie)
             </div>
             <ul>
                 <li>
-                    <Link to="cast" state={{from: location?.state?.from}}>Get to know the cast</Link>
+                    <Link to="cast" state={{ from: location?.state?.from }}>Get to know the cast</Link>
                 </li>
                 <li>
-                    <Link to="reviews" state={{from: location?.state?.from}}>Go through the reviews</Link>
+                    <Link to="reviews" state={{ from: location?.state?.from }}>Go through the reviews</Link>
                 </li>
             </ul>
             <Outlet />
-        </main>
-    );
+        </div>
+    )
 };
 
 export default MovieDetails;

@@ -72,9 +72,9 @@ export async function getBySearchMovies(formInput) {
 //         })
 //         .catch(error => { });
 // }
-export async function getMovieById(id) {
+export async function getMovieById(movieId) {
     try {
-        const data = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${KEY}`);
+        const data = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${KEY}`);
         return data;
     } catch (error) {
         return error.message;
