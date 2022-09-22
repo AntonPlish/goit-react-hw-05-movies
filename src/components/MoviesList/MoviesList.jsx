@@ -5,10 +5,9 @@ const MoviesList = ({ movies }) => {
     const location = useLocation();
         return (
             <Container>
-                {movies.map(({ original_title, id, backdrop_path }) => (
+                {movies.map(({ original_title, id }) => (
                     <CardWrapper key={id}>
                         <Link to={`${id}`} state={{ from: location }}>
-                            <img src={backdrop_path} alt="" />
                             <MovieName>{original_title}</MovieName>
                         </Link>
                     </CardWrapper>
