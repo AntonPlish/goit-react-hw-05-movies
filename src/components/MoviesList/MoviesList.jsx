@@ -7,7 +7,7 @@ const MoviesList = ({ movies }) => {
             <Container>
                 {movies.map(({ original_title, id }) => (
                     <CardWrapper key={id}>
-                        <Link to={`movies/${id}`} state={{ from: "/home" }}>
+                        <Link to={`movies/${id}`} state={{ from: '/home' }}>
                             <MovieName>{original_title}</MovieName>
                         </Link>
                     </CardWrapper>
