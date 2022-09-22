@@ -9,7 +9,11 @@ const MovieDetails = () => {
     const location = useLocation();
 
     useEffect(() => {
-        getMovieById(movieId).then(setMovie);
+        async function fetchReviews() {
+            const resReviews = await getMovieById(movieId)
+            setMovie(resReviews);
+        }
+        fetchReviews();
     }, [movieId]);
 
     if (!movie) { return null };
@@ -32,10 +36,10 @@ const MovieDetails = () => {
             </div>
             <ul>
                 <li>
-                    <Link to="cast" state={{ from: location?.state?.from }}>Get to know the cast</Link>
+                    <Link to="cast" state={{ from: location?.state?.from }}>Cast</Link>
                 </li>
                 <li>
-                    <Link to="reviews" state={{ from: location?.state?.from }}>Go through the reviews</Link>
+                    <Link to="reviews" state={{ from: location?.state?.from }}>Reviews</Link>
                 </li>
             </ul>
             <Outlet />

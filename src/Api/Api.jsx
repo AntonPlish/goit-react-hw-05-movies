@@ -92,7 +92,7 @@ export async function getCast(id) {
 
 export async function getReviews(id) {
     try {
-        const response = await axios.get(`${BY_ID}${id}/reviews?api_key=${KEY}`);
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${KEY}`);
         return response;
     } catch (error) {
         return error.message;

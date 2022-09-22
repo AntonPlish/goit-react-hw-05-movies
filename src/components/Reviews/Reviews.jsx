@@ -7,7 +7,12 @@ const Review = () => {
     const [review, setReview] = useState(null);
     
     useEffect(() => {
-        getReviews(movieId).then(setReview)
+        async function fetchReviews() {
+            const resReviews = await getReviews(movieId);
+            setReview(resReviews);
+        }
+
+        fetchReviews();
     }, [movieId]);
 
     if (!review) {
@@ -15,15 +20,19 @@ const Review = () => {
     }
 
     return (
-        <div>
-            <ul>
-                {review.data.results.map(({ id, author, content }) =>
-                    <li key={id}>
-                        <p>{author}</p>
-                        <p>{content}</p>
-                    </li>)}
-            </ul>
-        </div>
+        <>
+            <div>
+                <ul>
+                    {review.data.results.length > 0 ? (review.data.results.map(({ id, author, content }) =>
+                        <li key={id}>
+                            <p>{author}</p>
+                            <p>{content}</p>
+                        </li>)) : (
+                        <p>We do not have any reviews for this movie.</p>
+                    )}
+                </ul>
+            </div>
+        </>
     );
 };
 
