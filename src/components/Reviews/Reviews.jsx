@@ -23,8 +23,8 @@ const Review = () => {
         <>
             <div>
                 <ul>
-                    {review.data.results.length > 0 ? (review.data.results.map(({ author, content }) =>
-                        <li>
+                    {review.data.results.length > 0 ? (review.data.results.map(({ id, author, content }) =>
+                        <li key={id}>
                             <p>{author}</p>
                             <p>{content}</p>
                         </li>)) : (
