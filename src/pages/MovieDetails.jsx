@@ -7,7 +7,6 @@ const MovieDetails = () => {
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
     const location = useLocation();
-    const backLinkHref = location.state?.from ?? '/movies';
 
     useEffect(() => {
         async function fetchReviews() {
@@ -18,6 +17,8 @@ const MovieDetails = () => {
     }, [movieId]);
 
     if (!movie) { return null };
+
+    const backLinkHref = location?.state?.from ?? '/movies';
     
     const { backdrop_path, original_title, popularity, overview, genres } = movie.data;
 

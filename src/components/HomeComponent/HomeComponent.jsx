@@ -20,7 +20,7 @@ export default function HomeComponent() {
             <List>
                 {trendsMovies.map(trendsMovie => (
                     <ListWrapper key={trendsMovie.id}>
-                        <Link to={`movies/${trendsMovie.id}`}>{trendsMovie.title}</Link>
+                        <Link to={`movies/${trendsMovie.id}`} state={{ from: '/home' }}>{trendsMovie.title}</Link>
                     </ListWrapper>
                 ))}
             </List>
